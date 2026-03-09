@@ -141,30 +141,35 @@ nav {
   top: 100px;
   left: 0;
   right: 0;
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  color: var(--gray-400);
-  border-top: 1px solid var(--gray-100);
-  border-bottom: 1px solid var(--gray-100);
-  padding: 8px 0;
+  border-top: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 14px 0;
   overflow: hidden;
   white-space: nowrap;
+  background: var(--black);
 }
 
-.ticker-inner {
-  display: inline-block;
-  animation: ticker 30s linear infinite;
+.hero-ticker .marquee-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee 20s linear infinite;
 }
 
-@keyframes ticker {
-  0% {
-    transform: translateX(0);
-  }
+.hero-ticker .marquee-item {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-style: italic;
+  color: var(--white);
+  padding: 0 32px;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
 
-  100% {
-    transform: translateX(-50%);
-  }
+.hero-ticker .marquee-item strong {
+  font-style: normal;
+  font-weight: 700;
+  opacity: 1;
+  color: var(--white);
 }
 
 .hero-left {

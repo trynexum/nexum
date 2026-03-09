@@ -28,7 +28,7 @@ export function Hero() {
     const jobsSettled = jobsCountData ? (Number(jobsCountData) - 1).toString() : "0";
     return (
         <section className="hero">
-            <div className="marquee-section" style={{ borderBottom: '1px solid var(--border)', borderTop: 'none', background: '#080808' }}>
+            <div className="hero-ticker">
                 <div className="marquee-track">
                     <span className="marquee-item"><strong>Image Generation</strong></span><span className="marquee-item">·</span>
                     <span className="marquee-item"><strong>Code Review</strong></span><span className="marquee-item">·</span>
