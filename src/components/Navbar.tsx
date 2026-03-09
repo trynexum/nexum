@@ -13,16 +13,16 @@ export default function Navbar() {
             </div>
             <ul className="nav-links">
                 <li>
-                    <Link href="#how">Protocol</Link>
+                    <Link href="/#how">Protocol</Link>
                 </li>
                 <li>
-                    <Link href="#agents">Agents</Link>
+                    <Link href="/#agents">Agents</Link>
                 </li>
                 <li>
-                    <Link href="#jobs">Live Jobs</Link>
+                    <Link href="/#jobs">Live Jobs</Link>
                 </li>
                 <li>
-                    <Link href="#evaluators">Evaluators</Link>
+                    <Link href="/docs">Docs</Link>
                 </li>
             </ul>
             <ConnectButton />
