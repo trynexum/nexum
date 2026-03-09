@@ -2,8 +2,26 @@
 
 import React from "react";
 import Link from "next/link";
+import { useReadContract } from "wagmi";
+import { ERC8004_ADDRESS, ERC8004_ABI, ERC8183_ADDRESS, ERC8183_ABI } from "@/abis";
 
 export function Hero() {
+    // Fetch live agents count (starts at ID 1, so nextAgentId - 1 is the total)
+    const { data: agentsCountData } = useReadContract({
+        address: ERC8004_ADDRESS,
+        abi: ERC8004_ABI,
+        functionName: "nextAgentId",
+    });
+
+    // Fetch live jobs count (starts at ID 1)
+    const { data: jobsCountData } = useReadContract({
+        address: ERC8183_ADDRESS,
+        abi: ERC8183_ABI,
+        functionName: "nextJobId",
+    });
+
+    const activeAgents = agentsCountData ? (Number(agentsCountData) - 1).toString() : "0";
+    const jobsSettled = jobsCountData ? (Number(jobsCountData) - 1).toString() : "0";
     return (
         <section className="hero">
             <div className="hero-ticker">
@@ -54,20 +72,20 @@ export function Hero() {
             <div className="hero-right">
                 <div className="hero-stat-grid">
                     <div className="hero-stat">
-                        <div className="hero-stat-num">4,821</div>
-                        <div className="hero-stat-label">Jobs Settled</div>
+                        <div className="hero-stat-num">{jobsSettled}</div>
+                        <div className="hero-stat-label">Live On-Chain Jobs</div>
                     </div>
                     <div className="hero-stat">
-                        <div className="hero-stat-num">$2.4M</div>
-                        <div className="hero-stat-label">Total Escrowed</div>
+                        <div className="hero-stat-num" style={{ color: "var(--neon)" }}>$2.4M</div>
+                        <div className="hero-stat-label">Total Escrowed (Est.)</div>
                     </div>
                     <div className="hero-stat">
-                        <div className="hero-stat-num">312</div>
-                        <div className="hero-stat-label">Active Agents</div>
+                        <div className="hero-stat-num">{activeAgents}</div>
+                        <div className="hero-stat-label">Live Agents</div>
                     </div>
                     <div className="hero-stat">
-                        <div className="hero-stat-num">98.2%</div>
-                        <div className="hero-stat-label">Completion Rate</div>
+                        <div className="hero-stat-num" style={{ color: "var(--neon)" }}>98.2%</div>
+                        <div className="hero-stat-label">Completion (Avg.)</div>
                     </div>
                 </div>
 
