@@ -28,17 +28,24 @@ export function Hero() {
     const jobsSettled = jobsCountData ? (Number(jobsCountData) - 1).toString() : "0";
     return (
         <section className="hero">
-            <div className="hero-ticker">
-                <div className="ticker-inner">
-                    &nbsp;&nbsp;&nbsp; AWAITING FIRST JOB ON BASE SEPOLIA... &nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;
-                    ERC-8183 PROTOCOL LIVE &nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;
-                    NO JOBS CURRENTLY IN ESCROW &nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;
-                    AWAITING FIRST JOB ON BASE SEPOLIA... &nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;
-                    ERC-8183 PROTOCOL LIVE &nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;
-                    NO JOBS CURRENTLY IN ESCROW &nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;
-                    AWAITING FIRST JOB ON BASE SEPOLIA... &nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;
-                    ERC-8183 PROTOCOL LIVE &nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;
-                    NO JOBS CURRENTLY IN ESCROW &nbsp;&nbsp;&nbsp;
+            <div className="marquee-section" style={{ borderBottom: '1px solid var(--border)', borderTop: 'none', background: '#080808' }}>
+                <div className="marquee-track">
+                    <span className="marquee-item"><strong>Image Generation</strong></span><span className="marquee-item">·</span>
+                    <span className="marquee-item"><strong>Code Review</strong></span><span className="marquee-item">·</span>
+                    <span className="marquee-item"><strong>Portfolio Rebalancing</strong></span><span className="marquee-item">·</span>
+                    <span className="marquee-item"><strong>Legal Analysis</strong></span><span className="marquee-item">·</span>
+                    <span className="marquee-item"><strong>Data Transformation</strong></span><span className="marquee-item">·</span>
+                    <span className="marquee-item"><strong>Content Strategy</strong></span><span className="marquee-item">·</span>
+                    <span className="marquee-item"><strong>ZK Proof Generation</strong></span><span className="marquee-item">·</span>
+                    <span className="marquee-item"><strong>Trade Execution</strong></span><span className="marquee-item">·</span>
+                    <span className="marquee-item"><strong>Image Generation</strong></span><span className="marquee-item">·</span>
+                    <span className="marquee-item"><strong>Code Review</strong></span><span className="marquee-item">·</span>
+                    <span className="marquee-item"><strong>Portfolio Rebalancing</strong></span><span className="marquee-item">·</span>
+                    <span className="marquee-item"><strong>Legal Analysis</strong></span><span className="marquee-item">·</span>
+                    <span className="marquee-item"><strong>Data Transformation</strong></span><span className="marquee-item">·</span>
+                    <span className="marquee-item"><strong>Content Strategy</strong></span><span className="marquee-item">·</span>
+                    <span className="marquee-item"><strong>ZK Proof Generation</strong></span><span className="marquee-item">·</span>
+                    <span className="marquee-item"><strong>Trade Execution</strong></span><span className="marquee-item">·</span>
                 </div>
             </div>
 
@@ -106,75 +113,4 @@ export function Hero() {
     );
 }
 
-export function Marquee() {
-    return (
-        <div className="marquee-section">
-            <div className="marquee-track">
-                <span className="marquee-item">
-                    <strong>Image Generation</strong>
-                </span>
-                <span className="marquee-item">·</span>
-                <span className="marquee-item">
-                    <strong>Code Review</strong>
-                </span>
-                <span className="marquee-item">·</span>
-                <span className="marquee-item">
-                    <strong>Portfolio Rebalancing</strong>
-                </span>
-                <span className="marquee-item">·</span>
-                <span className="marquee-item">
-                    <strong>Legal Analysis</strong>
-                </span>
-                <span className="marquee-item">·</span>
-                <span className="marquee-item">
-                    <strong>Data Transformation</strong>
-                </span>
-                <span className="marquee-item">·</span>
-                <span className="marquee-item">
-                    <strong>Content Strategy</strong>
-                </span>
-                <span className="marquee-item">·</span>
-                <span className="marquee-item">
-                    <strong>ZK Proof Generation</strong>
-                </span>
-                <span className="marquee-item">·</span>
-                <span className="marquee-item">
-                    <strong>Trade Execution</strong>
-                </span>
-                <span className="marquee-item">·</span>
-                <span className="marquee-item">
-                    <strong>Image Generation</strong>
-                </span>
-                <span className="marquee-item">·</span>
-                <span className="marquee-item">
-                    <strong>Code Review</strong>
-                </span>
-                <span className="marquee-item">·</span>
-                <span className="marquee-item">
-                    <strong>Portfolio Rebalancing</strong>
-                </span>
-                <span className="marquee-item">·</span>
-                <span className="marquee-item">
-                    <strong>Legal Analysis</strong>
-                </span>
-                <span className="marquee-item">·</span>
-                <span className="marquee-item">
-                    <strong>Data Transformation</strong>
-                </span>
-                <span className="marquee-item">·</span>
-                <span className="marquee-item">
-                    <strong>Content Strategy</strong>
-                </span>
-                <span className="marquee-item">·</span>
-                <span className="marquee-item">
-                    <strong>ZK Proof Generation</strong>
-                </span>
-                <span className="marquee-item">·</span>
-                <span className="marquee-item">
-                    <strong>Trade Execution</strong>
-                </span>
-                <span className="marquee-item">·</span>
-            </div>
-        </div>
-    );
-}
+
