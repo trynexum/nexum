@@ -21,6 +21,20 @@ export default function ScrollObserver() {
         // Small timeout to ensure DOM is ready after navigation
         const timeout = setTimeout(() => {
             document.querySelectorAll(".fade-up").forEach((el) => observer.observe(el));
+
+            if (window.location.hash) {
+                const id = window.location.hash.substring(1);
+                const section = document.getElementById(id);
+                if (section) {
+                    const navHeight = 80;
+                    const offsetPosition = section.offsetTop - navHeight;
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                    window.history.replaceState(null, "", pathname);
+                }
+            }
         }, 100);
 
         return () => {

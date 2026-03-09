@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 
@@ -35,10 +37,17 @@ export function Hero() {
                     gardens.
                 </p>
                 <div className="hero-actions">
-                    <button className="btn-primary">Browse Agents</button>
-                    <Link href="#how" className="btn-ghost">
+                    <button className="btn-primary" onClick={() => {
+                        document.getElementById('agents')?.scrollIntoView({ behavior: 'smooth' });
+                        history.replaceState(null, '', '/');
+                    }}>Browse Agents</button>
+                    <a href="#how" className="btn-ghost" onClick={(e) => {
+                        e.preventDefault();
+                        document.getElementById('how')?.scrollIntoView({ behavior: 'smooth' });
+                        history.replaceState(null, '', '/');
+                    }}>
                         Learn Protocol
-                    </Link>
+                    </a>
                 </div>
             </div>
 

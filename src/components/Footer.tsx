@@ -1,8 +1,33 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Logo from "./Logo";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Footer() {
+    const pathname = usePathname();
+    const router = useRouter();
+
+    const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+        e.preventDefault();
+
+        if (pathname === "/") {
+            const section = document.getElementById(targetId);
+            if (section) {
+                const navHeight = 80;
+                const offsetPosition = section.offsetTop - navHeight;
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
+                history.replaceState(null, "", "/");
+            }
+        } else {
+            router.push(`/#${targetId}`);
+        }
+    };
+
     return (
         <footer>
             <div className="footer-top">
@@ -20,16 +45,16 @@ export default function Footer() {
                     <div className="footer-col-title">Protocol</div>
                     <ul className="footer-links">
                         <li>
-                            <Link href="#">ERC-8183 Spec</Link>
+                            <Link href="/docs">ERC-8183 Spec</Link>
                         </li>
                         <li>
-                            <Link href="#">ERC-8004 Spec</Link>
+                            <Link href="/docs">ERC-8004 Spec</Link>
                         </li>
                         <li>
-                            <Link href="#">Smart Contracts</Link>
+                            <Link href="/docs">Smart Contracts</Link>
                         </li>
                         <li>
-                            <Link href="#">GitHub</Link>
+                            <Link href="https://github.com/usenexum" target="_blank" rel="noreferrer">GitHub</Link>
                         </li>
                     </ul>
                 </div>
@@ -37,16 +62,16 @@ export default function Footer() {
                     <div className="footer-col-title">Platform</div>
                     <ul className="footer-links">
                         <li>
-                            <Link href="#">Browse Agents</Link>
+                            <a href="/#agents" onClick={(e) => handleScroll(e, "agents")}>Browse Agents</a>
                         </li>
                         <li>
-                            <Link href="#">Post a Job</Link>
+                            <a href="/#jobs" onClick={(e) => handleScroll(e, "jobs")}>Post a Job</a>
                         </li>
                         <li>
-                            <Link href="#">Become Evaluator</Link>
+                            <Link href="/docs">Become Evaluator</Link>
                         </li>
                         <li>
-                            <Link href="#">Live Jobs</Link>
+                            <a href="/#jobs" onClick={(e) => handleScroll(e, "jobs")}>Live Jobs</a>
                         </li>
                     </ul>
                 </div>
@@ -54,16 +79,13 @@ export default function Footer() {
                     <div className="footer-col-title">Community</div>
                     <ul className="footer-links">
                         <li>
-                            <Link href="#">Telegram</Link>
+                            <a href="https://t.me/nexum_eth" target="_blank" rel="noreferrer">Telegram</a>
                         </li>
                         <li>
-                            <Link href="#">ETH Magicians</Link>
+                            <a href="https://ethereum-magicians.org/" target="_blank" rel="noreferrer">ETH Magicians</a>
                         </li>
                         <li>
-                            <Link href="#">Virtuals Protocol</Link>
-                        </li>
-                        <li>
-                            <Link href="#">EF dAI Team</Link>
+                            <a href="https://virtuals.io" target="_blank" rel="noreferrer">Virtuals Protocol</a>
                         </li>
                     </ul>
                 </div>
