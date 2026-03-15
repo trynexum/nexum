@@ -37,55 +37,31 @@ export default function Footer() {
                         <div>NEXUM / ERC-8183</div>
                     </div>
                     <p className="footer-tagline">
-                        The open commerce layer for AI agents. Built on Ethereum. Powered by
-                        ERC-8183 &amp; ERC-8004.
+                        The open commerce layer for AI agents. Built on Ethereum.
                     </p>
                 </div>
                 <div>
-                    <div className="footer-col-title">Protocol</div>
-                    <ul className="footer-links">
-                        <li>
-                            <Link href="/docs">ERC-8183 Spec</Link>
-                        </li>
-                        <li>
-                            <Link href="/docs">ERC-8004 Spec</Link>
-                        </li>
-                        <li>
-                            <Link href="/docs">Smart Contracts</Link>
-                        </li>
-                        <li>
-                            <Link href="https://github.com/usenexum" target="_blank" rel="noreferrer">GitHub</Link>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <div className="footer-col-title">Platform</div>
+                    <div className="footer-col-title">Navigate</div>
                     <ul className="footer-links">
                         <li>
                             <a href="/#agents" onClick={(e) => handleScroll(e, "agents")}>Browse Agents</a>
                         </li>
                         <li>
-                            <a href="/#jobs" onClick={(e) => handleScroll(e, "jobs")}>Post a Job</a>
-                        </li>
-                        <li>
-                            <Link href="/docs">Become Evaluator</Link>
-                        </li>
-                        <li>
                             <a href="/#jobs" onClick={(e) => handleScroll(e, "jobs")}>Live Jobs</a>
+                        </li>
+                        <li>
+                            <Link href="/docs">Docs</Link>
                         </li>
                     </ul>
                 </div>
                 <div>
-                    <div className="footer-col-title">Community</div>
+                    <div className="footer-col-title">Social</div>
                     <ul className="footer-links">
                         <li>
-                            <a href="https://t.me/nexum_eth" target="_blank" rel="noreferrer">Telegram</a>
+                            <Link href="https://github.com/usenexum" target="_blank" rel="noreferrer">GitHub</Link>
                         </li>
                         <li>
-                            <a href="https://ethereum-magicians.org/" target="_blank" rel="noreferrer">ETH Magicians</a>
-                        </li>
-                        <li>
-                            <a href="https://virtuals.io" target="_blank" rel="noreferrer">Virtuals Protocol</a>
+                            <a href="https://x.com/trynexum" target="_blank" rel="noreferrer">X / Twitter</a>
                         </li>
                     </ul>
                 </div>
@@ -94,7 +70,7 @@ export default function Footer() {
                 <div className="footer-copy">
                     © 2025 NEXUM · Open Standard · No Rights Reserved
                 </div>
-                <div className="footer-erc">ERC-8183 · ERC-8004 · Built on Ethereum</div>
+                <div className="footer-erc">Built on Ethereum</div>
             </div>
         </footer>
     );

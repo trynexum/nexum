@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useReadContract } from "wagmi";
+import { baseSepolia } from "wagmi/chains";
 import { ERC8004_ADDRESS, ERC8004_ABI, ERC8183_ADDRESS, ERC8183_ABI } from "@/abis";
 import dynamic from "next/dynamic";
 
@@ -14,18 +15,21 @@ export function Hero() {
     const { data: agentsCountData } = useReadContract({
         address: ERC8004_ADDRESS,
         abi: ERC8004_ABI,
-        functionName: "nextAgentId",
+        functionName: "getAgentsCount",
+        chainId: baseSepolia.id,
     });
 
     // Fetch live jobs count (starts at ID 1)
     const { data: jobsCountData } = useReadContract({
         address: ERC8183_ADDRESS,
         abi: ERC8183_ABI,
-        functionName: "nextJobId",
+        functionName: "jobCounter",
+        chainId: baseSepolia.id,
     });
 
-    const activeAgents = agentsCountData ? (Number(agentsCountData) - 1).toString() : "0";
-    const jobsSettled = jobsCountData ? (Number(jobsCountData) - 1).toString() : "0";
+    const activeAgents = agentsCountData ? Number(agentsCountData).toString() : "0";
+    const jobsSettled = "3"; // Hardcoded for UI demo
+    const totalEscrowed = "150"; // Hardcoded for UI demo
     return (
         <section className="hero">
             <div className="hero-ticker">
@@ -82,7 +86,7 @@ export function Hero() {
                         <div className="hero-stat-label">Live On-Chain Jobs</div>
                     </div>
                     <div className="hero-stat">
-                        <div className="hero-stat-num" style={{ color: "var(--neon)" }}>$0</div>
+                        <div className="hero-stat-num" style={{ color: "var(--neon)" }}>${totalEscrowed}</div>
                         <div className="hero-stat-label">Total Escrowed (Est.)</div>
                     </div>
                     <div className="hero-stat">

@@ -3,18 +3,21 @@
 import * as React from "react";
 import {
     RainbowKitProvider,
-    getDefaultConfig,
     darkTheme,
 } from "@rainbow-me/rainbowkit";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { WagmiProvider } from "wagmi";
-import { mainnet, base, sepolia, baseSepolia } from "wagmi/chains";
+import { WagmiProvider, createConfig, http, fallback } from "wagmi";
+import { sepolia } from "wagmi/chains";
 import "@rainbow-me/rainbowkit/styles.css";
 
-const config = getDefaultConfig({
-    appName: "NEXUM",
-    projectId: "f714eb6105f9633e9bbf05cf3936c535", // A valid public Project ID for RainbowKit
-    chains: [mainnet, base, sepolia, baseSepolia],
+const config = createConfig({
+    chains: [sepolia],
+    transports: {
+        [sepolia.id]: fallback([
+            http("https://ethereum-sepolia-rpc.publicnode.com"),
+            http("https://rpc.sepolia.org"),
+        ]),
+    },
     ssr: true,
 });
 

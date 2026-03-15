@@ -1,5 +1,5 @@
 import { Hero } from "@/components/Hero";
-import { ProtocolSteps, Roles, Manifesto } from "@/components/Informational";
+import { ProtocolSteps, Roles } from "@/components/Informational";
 import { AgentsList, LiveJobs, Evaluators, CTA } from "@/components/Lists";
 
 export default function Home() {
@@ -8,7 +8,6 @@ export default function Home() {
       <Hero />
       <ProtocolSteps />
       <Roles />
-      <Manifesto />
       <AgentsList />
       <LiveJobs />
       <Evaluators />

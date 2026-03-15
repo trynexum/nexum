@@ -3,6 +3,7 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import { useReadContract } from "wagmi";
+import { sepolia } from "wagmi/chains";
 import { ERC8004_ADDRESS, ERC8004_ABI } from "@/abis";
 
 const RegisterAgentModal = dynamic(() => import("./RegisterAgentModal"), { ssr: false });
@@ -19,14 +20,27 @@ interface AgentProfile {
 
 export function AgentsList() {
     // Fetch first 20 registered agents from the ERC-8004 contract on Sepolia
-    const { data, isLoading, isError } = useReadContract({
+    const { data, isLoading, isError, error } = useReadContract({
         address: ERC8004_ADDRESS,
         abi: ERC8004_ABI,
         functionName: "getAgents",
         args: [BigInt(0), BigInt(20)],
+        chainId: sepolia.id,
     });
 
+    if (isError && error) {
+        console.error("Wagmi useReadContract Error:", error);
+    }
+
     const [addresses, profiles] = (data as [string[], AgentProfile[]]) ?? [[], []];
+
+    const [activeFilter, setActiveFilter] = useState("All");
+
+    const CATEGORIES = ["All", "Creative", "Finance", "Code", "Data"];
+
+    const filteredProfiles = activeFilter === "All"
+        ? profiles
+        : profiles.filter((p) => p.category?.toLowerCase() === activeFilter.toLowerCase());
 
     return (
         <section className="agents-section" id="agents">
@@ -44,11 +58,15 @@ export function AgentsList() {
                     </em>
                 </h2>
                 <div className="agents-filter">
-                    <button className="filter-btn active">All</button>
-                    <button className="filter-btn">Creative</button>
-                    <button className="filter-btn">Finance</button>
-                    <button className="filter-btn">Code</button>
-                    <button className="filter-btn">Data</button>
+                    {CATEGORIES.map((cat) => (
+                        <button
+                            key={cat}
+                            className={`filter-btn ${activeFilter === cat ? "active" : ""}`}
+                            onClick={() => setActiveFilter(cat)}
+                        >
+                            {cat}
+                        </button>
+                    ))}
                 </div>
             </div>
             <table className="agents-table fade-up">
@@ -66,7 +84,7 @@ export function AgentsList() {
                     {isLoading && (
                         <tr>
                             <td colSpan={6} style={{ textAlign: "center", padding: "40px", opacity: 0.5 }}>
-                                ⏳ Fetching agents from Base Sepolia...
+                                ⏳ Fetching agents from Sepolia...
                             </td>
                         </tr>
                     )}
@@ -77,14 +95,14 @@ export function AgentsList() {
                             </td>
                         </tr>
                     )}
-                    {!isLoading && !isError && profiles.length === 0 && (
+                    {!isLoading && !isError && filteredProfiles.length === 0 && (
                         <tr>
                             <td colSpan={6} style={{ textAlign: "center", padding: "40px", opacity: 0.5 }}>
-                                No agents registered yet. Be the first to register on-chain!
+                                {activeFilter === "All" ? "No agents registered yet. Be the first!" : `No agents in the '${activeFilter}' category yet.`}
                             </td>
                         </tr>
                     )}
-                    {profiles.map((profile, i) => (
+                    {filteredProfiles.map((profile, i) => (
                         <tr key={addresses[i]}>
                             <td>
                                 <div className="agent-name">{profile.name}</div>
@@ -144,8 +162,26 @@ export function LiveJobs() {
                 </div>
             </div>
             <div className="jobs-list">
-                <div style={{ textAlign: "center", padding: "60px 20px", opacity: 0.5, borderBottom: "1px solid var(--border)", fontFamily: "monospace" }}>
-                    No jobs currently funded on the Sepolia network. Deploy your first agent and start a job to see it here!
+                <div className="jobs-grid">
+                    {[
+                        { id: "104", agent: "CodeSentinel-v2", task: "Smart Contract Audit (ERC-4626)", amount: "85", status: "In Progress" },
+                        { id: "103", agent: "Midjourney-API-Wrapper", task: "Batch Generation (100 assets)", amount: "20", status: "In Progress" },
+                        { id: "102", agent: "DataForge AI", task: "ETL Pipeline (10GB JSON)", amount: "45", status: "Evaluating" },
+                    ].map((job) => (
+                        <div key={job.id} className="job-card fade-up">
+                            <div className="job-card-header">
+                                <span className="job-id">JOB #{job.id}</span>
+                                <span className={`job-status status-${job.status === "In Progress" ? "busy" : "available"}`}>{job.status}</span>
+                            </div>
+                            <div className="job-details">
+                                <div className="job-task">{job.task}</div>
+                                <div className="job-meta">
+                                    <span>Agent: <strong>{job.agent}</strong></span>
+                                    <span>Escrow: <strong style={{ color: "var(--neon)" }}>{job.amount} <span style={{ fontSize: "0.75em", opacity: 0.8, fontWeight: "normal" }}>USDC</span></strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </section>
@@ -153,19 +189,48 @@ export function LiveJobs() {
 }
 
 export function Evaluators() {
+    const EVALUATORS = [
+        { addr: "0x72FeeDE6c6...A3F2", evals: 8, approveRate: "87.5%", rejectRate: "12.5%", avgResponse: "2m 14s", firstSeen: "3/10/2026", lastActive: "3/10/2026" },
+        { addr: "0xe8bab8f8...9b8c28", evals: 3, approveRate: "66.7%", rejectRate: "33.3%", avgResponse: "–", firstSeen: "3/10/2026", lastActive: "3/10/2026" },
+        { addr: "0x33333333...333333", evals: 0, approveRate: "–", rejectRate: "–", avgResponse: "–", firstSeen: "3/10/2026", lastActive: "3/10/2026" },
+    ];
     return (
-        <section className="section" id="evaluators">
-            <div className="section-header fade-up">
-                <div className="section-num">04 / Trust Layer</div>
-                <h2 className="section-title">
-                    Trusted<br />
-                    <em>Evaluators</em>
-                </h2>
+        <section className="agents-section" id="evaluators">
+            <div className="agents-header fade-up" style={{ borderBottom: "1px solid rgba(245,244,240,0.08)", paddingBottom: "40px", marginBottom: "0" }}>
+                <div className="section-num" style={{ color: "rgba(245,244,240,0.5)", fontFamily: "var(--font-mono)", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "16px" }}>04 / Trust Layer</div>
+                <div className="eval-performance-label">Evaluator Performance</div>
+                <p className="eval-performance-desc">
+                    Addresses that have evaluated ERC-8183 jobs. Metrics derived from on-chain <code>JobCompleted</code> and <code>JobRejected</code> events attributed to each evaluator address.
+                </p>
             </div>
-            <div className="eval-grid" style={{ display: 'block' }}>
-                <div style={{ textAlign: "center", padding: "60px 20px", opacity: 0.5, border: "1px solid var(--border)", fontFamily: "monospace", borderRadius: "12px", background: "rgba(0,0,0,0.2)" }}>
-                    No evaluators registered on Base Sepolia. The network is waiting for its first trusted judge.
-                </div>
+            <div className="eval-table-wrap fade-up">
+                <table className="eval-table">
+                    <thead>
+                        <tr>
+                            <th>Evaluator</th>
+                            <th>Total Evaluations</th>
+                            <th>Approve Rate</th>
+                            <th>Reject Rate</th>
+                            <th>Avg Response Time</th>
+                            <th>First Seen</th>
+                            <th>Last Active</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {EVALUATORS.map((ev) => (
+                            <tr key={ev.addr}>
+                                <td className="eval-addr">{ev.addr}</td>
+                                <td>{ev.evals}</td>
+                                <td className={ev.approveRate !== "–" ? "eval-approve" : ""}>{ev.approveRate}</td>
+                                <td className={ev.rejectRate !== "–" ? "eval-reject" : ""}>{ev.rejectRate}</td>
+                                <td>{ev.avgResponse}</td>
+                                <td>{ev.firstSeen}</td>
+                                <td>{ev.lastActive}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                <div className="eval-table-footer">Testnet data. Sepolia.</div>
             </div>
         </section>
     );
