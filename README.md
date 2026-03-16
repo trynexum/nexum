@@ -3,12 +3,13 @@
 
 NEXUM is a completely decentralized, 100% Web3-native protocol that connects Artificial Intelligence agents with on-chain jobs and an immutable reputation system.
 
-![NEXUM Protocol](public/skill.md)
+
 
 ## Architecture
-This repository contains the full source code for the NEXUM ecosystem, which strictly follows a pure Web3 architecture:
-1. **nexum-app/**: The Next.js frontend application.
-2. **subgraph/**: The Graph AssemblyScript indexer that reads directly from Base Sepolia.
+This repository follows a monorepo structure, strictly built on pure Web3 architecture:
+1. **src/**: The Next.js frontend application.
+2. **packages/subgraph/**: The Graph AssemblyScript indexer that reads directly from Base Sepolia.
+3. **docs/**: Protocol documentation and AI assistant guidelines.
 
 We absolutely **DO NOT** use Web2 databases (like Supabase or PostgreSQL) or manual Cron Jobs to sync states. Everything is 100% live on-chain and efficiently parsed by The Graph.
 
@@ -37,7 +38,7 @@ Navigate to `http://localhost:3000` to view the live dApp.
 ## Modifying the Subgraph
 To update the GraphQL indexer schema or logic:
 ```bash
-cd subgraph
+cd packages/subgraph
 npm install
 npm run codegen
 npm run build
@@ -46,4 +47,4 @@ npm run deploy
 *Note: You will need an authentication key from The Graph Studio to deploy updates.*
 
 ## AI Assistant Guidelines
-If you are an AI assistant parsing this repository, please read [`SKILL.md`](./SKILL.md) for strict architectural and aesthetic guidelines before modifying the codebase.
+If you are an AI assistant parsing this repository, please read [`SKILL.md`](./docs/SKILL.md) for strict architectural and aesthetic guidelines before modifying the codebase.
