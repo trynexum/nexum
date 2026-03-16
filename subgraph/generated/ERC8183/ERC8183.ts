@@ -179,7 +179,7 @@ export class ERC8183__jobsResult {
   }
 
   toMap(): TypedMap<string, ethereum.Value> {
-    let map = new TypedMap<string, ethereum.Value>();
+    const map = new TypedMap<string, ethereum.Value>();
     map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
     map.set("value1", ethereum.Value.fromAddress(this.value1));
     map.set("value2", ethereum.Value.fromAddress(this.value2));
@@ -243,7 +243,7 @@ export class ERC8183 extends ethereum.SmartContract {
   }
 
   agentJobs(param0: Address, param1: BigInt): BigInt {
-    let result = super.call(
+    const result = super.call(
       "agentJobs",
       "agentJobs(address,uint256):(uint256)",
       [
@@ -256,7 +256,7 @@ export class ERC8183 extends ethereum.SmartContract {
   }
 
   try_agentJobs(param0: Address, param1: BigInt): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
+    const result = super.tryCall(
       "agentJobs",
       "agentJobs(address,uint256):(uint256)",
       [
@@ -267,7 +267,7 @@ export class ERC8183 extends ethereum.SmartContract {
     if (result.reverted) {
       return new ethereum.CallResult();
     }
-    let value = result.value;
+    const value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
@@ -279,7 +279,7 @@ export class ERC8183 extends ethereum.SmartContract {
     _specURI: string,
     _deadlineDurationDays: BigInt,
   ): BigInt {
-    let result = super.call(
+    const result = super.call(
       "createAndFundJob",
       "createAndFundJob(address,address,address,uint256,string,uint256):(uint256)",
       [
@@ -303,7 +303,7 @@ export class ERC8183 extends ethereum.SmartContract {
     _specURI: string,
     _deadlineDurationDays: BigInt,
   ): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
+    const result = super.tryCall(
       "createAndFundJob",
       "createAndFundJob(address,address,address,uint256,string,uint256):(uint256)",
       [
@@ -318,12 +318,12 @@ export class ERC8183 extends ethereum.SmartContract {
     if (result.reverted) {
       return new ethereum.CallResult();
     }
-    let value = result.value;
+    const value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
   humanJobs(param0: Address, param1: BigInt): BigInt {
-    let result = super.call(
+    const result = super.call(
       "humanJobs",
       "humanJobs(address,uint256):(uint256)",
       [
@@ -336,7 +336,7 @@ export class ERC8183 extends ethereum.SmartContract {
   }
 
   try_humanJobs(param0: Address, param1: BigInt): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
+    const result = super.tryCall(
       "humanJobs",
       "humanJobs(address,uint256):(uint256)",
       [
@@ -347,27 +347,27 @@ export class ERC8183 extends ethereum.SmartContract {
     if (result.reverted) {
       return new ethereum.CallResult();
     }
-    let value = result.value;
+    const value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
   jobCounter(): BigInt {
-    let result = super.call("jobCounter", "jobCounter():(uint256)", []);
+    const result = super.call("jobCounter", "jobCounter():(uint256)", []);
 
     return result[0].toBigInt();
   }
 
   try_jobCounter(): ethereum.CallResult<BigInt> {
-    let result = super.tryCall("jobCounter", "jobCounter():(uint256)", []);
+    const result = super.tryCall("jobCounter", "jobCounter():(uint256)", []);
     if (result.reverted) {
       return new ethereum.CallResult();
     }
-    let value = result.value;
+    const value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
   jobs(param0: BigInt): ERC8183__jobsResult {
-    let result = super.call(
+    const result = super.call(
       "jobs",
       "jobs(uint256):(uint256,address,address,address,address,uint256,uint8,string,string,uint256)",
       [ethereum.Value.fromUnsignedBigInt(param0)],
@@ -388,7 +388,7 @@ export class ERC8183 extends ethereum.SmartContract {
   }
 
   try_jobs(param0: BigInt): ethereum.CallResult<ERC8183__jobsResult> {
-    let result = super.tryCall(
+    const result = super.tryCall(
       "jobs",
       "jobs(uint256):(uint256,address,address,address,address,uint256,uint8,string,string,uint256)",
       [ethereum.Value.fromUnsignedBigInt(param0)],
@@ -396,7 +396,7 @@ export class ERC8183 extends ethereum.SmartContract {
     if (result.reverted) {
       return new ethereum.CallResult();
     }
-    let value = result.value;
+    const value = result.value;
     return ethereum.CallResult.fromValue(
       new ERC8183__jobsResult(
         value[0].toBigInt(),
@@ -414,22 +414,22 @@ export class ERC8183 extends ethereum.SmartContract {
   }
 
   owner(): Address {
-    let result = super.call("owner", "owner():(address)", []);
+    const result = super.call("owner", "owner():(address)", []);
 
     return result[0].toAddress();
   }
 
   try_owner(): ethereum.CallResult<Address> {
-    let result = super.tryCall("owner", "owner():(address)", []);
+    const result = super.tryCall("owner", "owner():(address)", []);
     if (result.reverted) {
       return new ethereum.CallResult();
     }
-    let value = result.value;
+    const value = result.value;
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
   registryContract(): Address {
-    let result = super.call(
+    const result = super.call(
       "registryContract",
       "registryContract():(address)",
       [],
@@ -439,7 +439,7 @@ export class ERC8183 extends ethereum.SmartContract {
   }
 
   try_registryContract(): ethereum.CallResult<Address> {
-    let result = super.tryCall(
+    const result = super.tryCall(
       "registryContract",
       "registryContract():(address)",
       [],
@@ -447,7 +447,7 @@ export class ERC8183 extends ethereum.SmartContract {
     if (result.reverted) {
       return new ethereum.CallResult();
     }
-    let value = result.value;
+    const value = result.value;
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 }

@@ -35,16 +35,16 @@ export function getOrCreateEvaluator(id: string): Evaluator {
 }
 
 export function handleJobCreated(event: JobCreated): void {
-  let job = new Job(event.params.jobId.toString())
+  const job = new Job(event.params.jobId.toString())
   job.client = event.params.client
   job.provider = event.params.provider.toHexString()
   job.amount = event.params.amount
   job.state = "Open"
   
-  let contract = ERC8183.bind(event.address)
-  let jobData = contract.try_jobs(event.params.jobId)
+  const contract = ERC8183.bind(event.address)
+  const jobData = contract.try_jobs(event.params.jobId)
   if (!jobData.reverted) {
-    let evalId = jobData.value.getEvaluator().toHexString()
+    const evalId = jobData.value.getEvaluator().toHexString()
     job.evaluator = evalId
     getOrCreateEvaluator(evalId)
     job.token = jobData.value.getToken()
@@ -61,12 +61,12 @@ export function handleJobCreated(event: JobCreated): void {
 }
 
 export function handleJobFunded(event: JobFunded): void {
-  let job = Job.load(event.params.jobId.toString())
+  const job = Job.load(event.params.jobId.toString())
   if (job != null) {
     job.state = "Funded"
     job.save()
 
-    let stat = getOrCreateProtocolStat()
+    const stat = getOrCreateProtocolStat()
     stat.totalEscrowed = stat.totalEscrowed.plus(job.amount)
     stat.liveJobsCounter = stat.liveJobsCounter.plus(BigInt.fromI32(1))
     stat.save()
@@ -74,7 +74,7 @@ export function handleJobFunded(event: JobFunded): void {
 }
 
 export function handleJobSubmitted(event: JobSubmitted): void {
-  let job = Job.load(event.params.jobId.toString())
+  const job = Job.load(event.params.jobId.toString())
   if (job != null) {
     job.state = "Submitted"
     job.resultURI = event.params.resultURI
@@ -83,14 +83,14 @@ export function handleJobSubmitted(event: JobSubmitted): void {
 }
 
 export function handleJobCompleted(event: JobCompleted): void {
-  let job = Job.load(event.params.jobId.toString())
+  const job = Job.load(event.params.jobId.toString())
   if (job != null) {
     job.state = "Completed"
     job.successful = event.params.successful
     job.save()
 
     // Update Evaluator history
-    let evalr = getOrCreateEvaluator(job.evaluator)
+    const evalr = getOrCreateEvaluator(job.evaluator)
     evalr.totalEvaluations = evalr.totalEvaluations.plus(BigInt.fromI32(1))
     if (event.params.successful) {
       evalr.approved = evalr.approved.plus(BigInt.fromI32(1))
@@ -100,21 +100,21 @@ export function handleJobCompleted(event: JobCompleted): void {
     evalr.save()
 
     // Update global stat
-    let stat = getOrCreateProtocolStat()
+    const stat = getOrCreateProtocolStat()
     stat.liveJobsCounter = stat.liveJobsCounter.minus(BigInt.fromI32(1))
     stat.save()
   }
 }
 
 export function handleJobRefunded(event: JobRefunded): void {
-  let job = Job.load(event.params.jobId.toString())
+  const job = Job.load(event.params.jobId.toString())
   if (job != null) {
     job.state = "Refunded"
     job.save()
 
     // Assuming a refund doesn't count as an evaluation by the evaluator
     // But it does reduce live jobs
-    let stat = getOrCreateProtocolStat()
+    const stat = getOrCreateProtocolStat()
     stat.liveJobsCounter = stat.liveJobsCounter.minus(BigInt.fromI32(1))
     // We also remove it from totalEscrowed since it's refunded
     stat.totalEscrowed = stat.totalEscrowed.minus(job.amount)

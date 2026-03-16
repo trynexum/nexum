@@ -18,7 +18,7 @@ export function getOrCreateProtocolStat(): ProtocolStat {
 }
 
 export function handleAgentRegistered(event: AgentRegistered): void {
-  let agent = new Agent(event.params.agentAddress.toHexString())
+  const agent = new Agent(event.params.agentAddress.toHexString())
   agent.name = event.params.name
   agent.category = event.params.category
   agent.bio = ""
@@ -31,13 +31,13 @@ export function handleAgentRegistered(event: AgentRegistered): void {
   agent.isActive = true
   agent.save()
 
-  let stat = getOrCreateProtocolStat()
+  const stat = getOrCreateProtocolStat()
   stat.agentsRegistered = stat.agentsRegistered.plus(BigInt.fromI32(1))
   stat.save()
 }
 
 export function handleReputationUpdated(event: ReputationUpdated): void {
-  let agent = Agent.load(event.params.agentAddress.toHexString())
+  const agent = Agent.load(event.params.agentAddress.toHexString())
   if (agent != null) {
     agent.repScore = event.params.newScore
     agent.totalJobs = event.params.totalJobs

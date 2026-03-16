@@ -112,7 +112,7 @@ export class ERC8004__agentsResult {
   }
 
   toMap(): TypedMap<string, ethereum.Value> {
-    let map = new TypedMap<string, ethereum.Value>();
+    const map = new TypedMap<string, ethereum.Value>();
     map.set("value0", ethereum.Value.fromString(this.value0));
     map.set("value1", ethereum.Value.fromString(this.value1));
     map.set("value2", ethereum.Value.fromString(this.value2));
@@ -195,7 +195,7 @@ export class ERC8004__getAgentsResult {
   }
 
   toMap(): TypedMap<string, ethereum.Value> {
-    let map = new TypedMap<string, ethereum.Value>();
+    const map = new TypedMap<string, ethereum.Value>();
     map.set("value0", ethereum.Value.fromAddressArray(this.value0));
     map.set("value1", ethereum.Value.fromTupleArray(this.value1));
     return map;
@@ -216,7 +216,7 @@ export class ERC8004 extends ethereum.SmartContract {
   }
 
   agents(param0: Address): ERC8004__agentsResult {
-    let result = super.call(
+    const result = super.call(
       "agents",
       "agents(address):(string,string,string,uint256,uint256,bool,string)",
       [ethereum.Value.fromAddress(param0)],
@@ -234,7 +234,7 @@ export class ERC8004 extends ethereum.SmartContract {
   }
 
   try_agents(param0: Address): ethereum.CallResult<ERC8004__agentsResult> {
-    let result = super.tryCall(
+    const result = super.tryCall(
       "agents",
       "agents(address):(string,string,string,uint256,uint256,bool,string)",
       [ethereum.Value.fromAddress(param0)],
@@ -242,7 +242,7 @@ export class ERC8004 extends ethereum.SmartContract {
     if (result.reverted) {
       return new ethereum.CallResult();
     }
-    let value = result.value;
+    const value = result.value;
     return ethereum.CallResult.fromValue(
       new ERC8004__agentsResult(
         value[0].toString(),
@@ -257,7 +257,7 @@ export class ERC8004 extends ethereum.SmartContract {
   }
 
   getAgents(offset: BigInt, limit: BigInt): ERC8004__getAgentsResult {
-    let result = super.call(
+    const result = super.call(
       "getAgents",
       "getAgents(uint256,uint256):(address[],(string,string,string,uint256,uint256,bool,string)[])",
       [
@@ -276,7 +276,7 @@ export class ERC8004 extends ethereum.SmartContract {
     offset: BigInt,
     limit: BigInt,
   ): ethereum.CallResult<ERC8004__getAgentsResult> {
-    let result = super.tryCall(
+    const result = super.tryCall(
       "getAgents",
       "getAgents(uint256,uint256):(address[],(string,string,string,uint256,uint256,bool,string)[])",
       [
@@ -287,7 +287,7 @@ export class ERC8004 extends ethereum.SmartContract {
     if (result.reverted) {
       return new ethereum.CallResult();
     }
-    let value = result.value;
+    const value = result.value;
     return ethereum.CallResult.fromValue(
       new ERC8004__getAgentsResult(
         value[0].toAddressArray(),
@@ -297,13 +297,13 @@ export class ERC8004 extends ethereum.SmartContract {
   }
 
   getAgentsCount(): BigInt {
-    let result = super.call("getAgentsCount", "getAgentsCount():(uint256)", []);
+    const result = super.call("getAgentsCount", "getAgentsCount():(uint256)", []);
 
     return result[0].toBigInt();
   }
 
   try_getAgentsCount(): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
+    const result = super.tryCall(
       "getAgentsCount",
       "getAgentsCount():(uint256)",
       [],
@@ -311,27 +311,27 @@ export class ERC8004 extends ethereum.SmartContract {
     if (result.reverted) {
       return new ethereum.CallResult();
     }
-    let value = result.value;
+    const value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
   owner(): Address {
-    let result = super.call("owner", "owner():(address)", []);
+    const result = super.call("owner", "owner():(address)", []);
 
     return result[0].toAddress();
   }
 
   try_owner(): ethereum.CallResult<Address> {
-    let result = super.tryCall("owner", "owner():(address)", []);
+    const result = super.tryCall("owner", "owner():(address)", []);
     if (result.reverted) {
       return new ethereum.CallResult();
     }
-    let value = result.value;
+    const value = result.value;
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
   registeredAgents(param0: BigInt): Address {
-    let result = super.call(
+    const result = super.call(
       "registeredAgents",
       "registeredAgents(uint256):(address)",
       [ethereum.Value.fromUnsignedBigInt(param0)],
@@ -341,7 +341,7 @@ export class ERC8004 extends ethereum.SmartContract {
   }
 
   try_registeredAgents(param0: BigInt): ethereum.CallResult<Address> {
-    let result = super.tryCall(
+    const result = super.tryCall(
       "registeredAgents",
       "registeredAgents(uint256):(address)",
       [ethereum.Value.fromUnsignedBigInt(param0)],
@@ -349,7 +349,7 @@ export class ERC8004 extends ethereum.SmartContract {
     if (result.reverted) {
       return new ethereum.CallResult();
     }
-    let value = result.value;
+    const value = result.value;
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 }

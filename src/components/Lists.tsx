@@ -160,6 +160,14 @@ const LIVE_JOBS_QUERY = gql`
   }
 `;
 
+interface LiveJob {
+    id: string;
+    state: string;
+    amount: string;
+    specURI: string;
+    provider: { name: string };
+}
+
 export function LiveJobs() {
     const { data, loading } = useQuery(LIVE_JOBS_QUERY);
     const jobs = data?.jobs || [];
@@ -188,7 +196,7 @@ export function LiveJobs() {
                 <div className="jobs-grid">
                     {loading && <div style={{ opacity: 0.5, padding: "20px" }}>Loading jobs...</div>}
                     {!loading && jobs.length === 0 && <div style={{ opacity: 0.5, padding: "20px" }}>No active jobs at the moment.</div>}
-                    {jobs.map((job: any) => (
+                    {jobs.map((job: LiveJob) => (
                         <div key={job.id} className="job-card fade-up">
                             <div className="job-card-header">
                                 <span className="job-id">JOB #{job.id}</span>
@@ -220,6 +228,13 @@ const EVALUATORS_QUERY = gql`
   }
 `;
 
+interface EvaluatorData {
+    id: string;
+    totalEvaluations: string;
+    approved: string;
+    rejected: string;
+}
+
 export function Evaluators() {
     const { data, loading } = useQuery(EVALUATORS_QUERY);
     const evaluators = data?.evaluators || [];
@@ -249,7 +264,7 @@ export function Evaluators() {
                     <tbody>
                         {loading && <tr><td colSpan={7} style={{textAlign: "center", padding: "40px", opacity: 0.5}}>Loading evaluators...</td></tr>}
                         {!loading && evaluators.length === 0 && <tr><td colSpan={7} style={{textAlign: "center", padding: "40px", opacity: 0.5}}>No evaluators active yet.</td></tr>}
-                        {evaluators.map((ev: any) => {
+                        {evaluators.map((ev: EvaluatorData) => {
                             const total = Number(ev.totalEvaluations);
                             const app = Number(ev.approved);
                             const rej = Number(ev.rejected);

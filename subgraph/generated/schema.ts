@@ -18,7 +18,7 @@ export class Agent extends Entity {
   }
 
   save(): void {
-    let id = this.get("id");
+    const id = this.get("id");
     assert(id != null, "Cannot save Agent entity without an ID");
     if (id) {
       assert(
@@ -38,7 +38,7 @@ export class Agent extends Entity {
   }
 
   get id(): string {
-    let value = this.get("id");
+    const value = this.get("id");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -51,7 +51,7 @@ export class Agent extends Entity {
   }
 
   get name(): string {
-    let value = this.get("name");
+    const value = this.get("name");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -64,7 +64,7 @@ export class Agent extends Entity {
   }
 
   get bio(): string {
-    let value = this.get("bio");
+    const value = this.get("bio");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -77,7 +77,7 @@ export class Agent extends Entity {
   }
 
   get avatarURI(): string {
-    let value = this.get("avatarURI");
+    const value = this.get("avatarURI");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -90,7 +90,7 @@ export class Agent extends Entity {
   }
 
   get models(): Array<string> {
-    let value = this.get("models");
+    const value = this.get("models");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -103,7 +103,7 @@ export class Agent extends Entity {
   }
 
   get category(): string {
-    let value = this.get("category");
+    const value = this.get("category");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -116,7 +116,7 @@ export class Agent extends Entity {
   }
 
   get endpointsURI(): string {
-    let value = this.get("endpointsURI");
+    const value = this.get("endpointsURI");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -129,7 +129,7 @@ export class Agent extends Entity {
   }
 
   get endpointsAuth(): string {
-    let value = this.get("endpointsAuth");
+    const value = this.get("endpointsAuth");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -142,7 +142,7 @@ export class Agent extends Entity {
   }
 
   get repScore(): BigInt {
-    let value = this.get("repScore");
+    const value = this.get("repScore");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -155,7 +155,7 @@ export class Agent extends Entity {
   }
 
   get totalJobs(): BigInt {
-    let value = this.get("totalJobs");
+    const value = this.get("totalJobs");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -168,7 +168,7 @@ export class Agent extends Entity {
   }
 
   get isActive(): boolean {
-    let value = this.get("isActive");
+    const value = this.get("isActive");
     if (!value || value.kind == ValueKind.NULL) {
       return false;
     } else {
@@ -200,7 +200,7 @@ export class Job extends Entity {
   }
 
   save(): void {
-    let id = this.get("id");
+    const id = this.get("id");
     assert(id != null, "Cannot save Job entity without an ID");
     if (id) {
       assert(
@@ -220,7 +220,7 @@ export class Job extends Entity {
   }
 
   get id(): string {
-    let value = this.get("id");
+    const value = this.get("id");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -233,7 +233,7 @@ export class Job extends Entity {
   }
 
   get client(): Bytes {
-    let value = this.get("client");
+    const value = this.get("client");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -246,7 +246,7 @@ export class Job extends Entity {
   }
 
   get provider(): string {
-    let value = this.get("provider");
+    const value = this.get("provider");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -259,7 +259,7 @@ export class Job extends Entity {
   }
 
   get evaluator(): string {
-    let value = this.get("evaluator");
+    const value = this.get("evaluator");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -272,7 +272,7 @@ export class Job extends Entity {
   }
 
   get token(): Bytes {
-    let value = this.get("token");
+    const value = this.get("token");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -285,7 +285,7 @@ export class Job extends Entity {
   }
 
   get amount(): BigInt {
-    let value = this.get("amount");
+    const value = this.get("amount");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -298,7 +298,7 @@ export class Job extends Entity {
   }
 
   get state(): string {
-    let value = this.get("state");
+    const value = this.get("state");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -311,7 +311,7 @@ export class Job extends Entity {
   }
 
   get specURI(): string {
-    let value = this.get("specURI");
+    const value = this.get("specURI");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -324,7 +324,7 @@ export class Job extends Entity {
   }
 
   get resultURI(): string | null {
-    let value = this.get("resultURI");
+    const value = this.get("resultURI");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
@@ -341,7 +341,7 @@ export class Job extends Entity {
   }
 
   get deadline(): BigInt {
-    let value = this.get("deadline");
+    const value = this.get("deadline");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -354,7 +354,7 @@ export class Job extends Entity {
   }
 
   get successful(): boolean {
-    let value = this.get("successful");
+    const value = this.get("successful");
     if (!value || value.kind == ValueKind.NULL) {
       return false;
     } else {
@@ -374,7 +374,7 @@ export class Evaluator extends Entity {
   }
 
   save(): void {
-    let id = this.get("id");
+    const id = this.get("id");
     assert(id != null, "Cannot save Evaluator entity without an ID");
     if (id) {
       assert(
@@ -394,7 +394,7 @@ export class Evaluator extends Entity {
   }
 
   get id(): string {
-    let value = this.get("id");
+    const value = this.get("id");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -407,7 +407,7 @@ export class Evaluator extends Entity {
   }
 
   get agentAddress(): string | null {
-    let value = this.get("agentAddress");
+    const value = this.get("agentAddress");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
@@ -424,7 +424,7 @@ export class Evaluator extends Entity {
   }
 
   get totalEvaluations(): BigInt {
-    let value = this.get("totalEvaluations");
+    const value = this.get("totalEvaluations");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -437,7 +437,7 @@ export class Evaluator extends Entity {
   }
 
   get approved(): BigInt {
-    let value = this.get("approved");
+    const value = this.get("approved");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -450,7 +450,7 @@ export class Evaluator extends Entity {
   }
 
   get rejected(): BigInt {
-    let value = this.get("rejected");
+    const value = this.get("rejected");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -478,7 +478,7 @@ export class ProtocolStat extends Entity {
   }
 
   save(): void {
-    let id = this.get("id");
+    const id = this.get("id");
     assert(id != null, "Cannot save ProtocolStat entity without an ID");
     if (id) {
       assert(
@@ -500,7 +500,7 @@ export class ProtocolStat extends Entity {
   }
 
   get id(): string {
-    let value = this.get("id");
+    const value = this.get("id");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -513,7 +513,7 @@ export class ProtocolStat extends Entity {
   }
 
   get totalEscrowed(): BigInt {
-    let value = this.get("totalEscrowed");
+    const value = this.get("totalEscrowed");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -526,7 +526,7 @@ export class ProtocolStat extends Entity {
   }
 
   get liveJobsCounter(): BigInt {
-    let value = this.get("liveJobsCounter");
+    const value = this.get("liveJobsCounter");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -539,7 +539,7 @@ export class ProtocolStat extends Entity {
   }
 
   get agentsRegistered(): BigInt {
-    let value = this.get("agentsRegistered");
+    const value = this.get("agentsRegistered");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -565,7 +565,7 @@ export class JobLoader extends Entity {
   }
 
   load(): Job[] {
-    let value = store.loadRelated(this._entity, this._id, this._field);
+    const value = store.loadRelated(this._entity, this._id, this._field);
     return changetype<Job[]>(value);
   }
 }
@@ -583,7 +583,7 @@ export class EvaluatorLoader extends Entity {
   }
 
   load(): Evaluator[] {
-    let value = store.loadRelated(this._entity, this._id, this._field);
+    const value = store.loadRelated(this._entity, this._id, this._field);
     return changetype<Evaluator[]>(value);
   }
 }
