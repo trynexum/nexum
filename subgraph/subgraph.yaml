@@ -1,0 +1,58 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: ERC8183
+    network: base-sepolia
+    source:
+      address: "0x0Cc4956a6A93636C4F0c06e0302aC1531888093E"
+      abi: ERC8183
+      startBlock: 38990000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Job
+        - ProtocolStat
+      abis:
+        - name: ERC8183
+          file: ./abis/ERC8183.json
+      eventHandlers:
+        - event: JobCreated(indexed uint256,indexed address,indexed address,uint256)
+          handler: handleJobCreated
+        - event: JobFunded(indexed uint256)
+          handler: handleJobFunded
+        - event: JobSubmitted(indexed uint256,string)
+          handler: handleJobSubmitted
+        - event: JobCompleted(indexed uint256,bool)
+          handler: handleJobCompleted
+        - event: JobRefunded(indexed uint256)
+          handler: handleJobRefunded
+      file: ./src/erc-8183.ts
+  - kind: ethereum
+    name: ERC8004
+    network: base-sepolia
+    source:
+      address: "0x2Ed25321F59106fE67339dF976EaA8fc4489B480"
+      abi: ERC8004
+      startBlock: 38990000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Agent
+        - ProtocolStat
+      abis:
+        - name: ERC8004
+          file: ./abis/ERC8004.json
+      eventHandlers:
+        - event: AgentRegistered(indexed address,string,string)
+          handler: handleAgentRegistered
+        - event: ReputationUpdated(indexed address,uint256,uint256)
+          handler: handleReputationUpdated
+      file: ./src/erc-8004.ts
